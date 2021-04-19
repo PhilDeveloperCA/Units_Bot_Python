@@ -1,0 +1,54 @@
+  Garbage Comment 1
+
+  data = message.content
+  unit1 = data[data.find('.')+1:data.find('(')]
+  unit2 = data[data.find(':')+1:len(data)]
+  if(not(unit1 in Base_Units.keys() and unit2 in Base_Units.keys())):
+    await message.channel.send('Invalid Unit, run $convert.show to show the different units that can be used')
+    return
+  host = data[data.find('(')+1:data.find(')')]
+  await message.channel.send('Convert Identified')
+  FirstUnit = Base_Units.get(unit1)
+  SecondUnit = Base_Units.get(unit2)
+  conversion = Unit.compare(float(host),FirstUnit, SecondUnit)
+  conversion_message = f"{host}{unit1} = {conversion:.3e}{unit2}"
+  await message.channel.send(conversion_message)
+
+  '''UnitDict = {
+  "feet" : .3048,
+  "meters" : 1,
+  "kilometers" : 1000,
+  "inches" : .3048/12,
+  "centimeter" : 1/100,
+  "yard" : 3*.3048,
+  "au" : 1.49597871e11,
+  "mile" : 5280*.3048,
+  "nauticle-mile" : 1852,
+  "light-year": 9.4607e15,
+}'''
+
+bot = commands.Bot(command_prefix='#')
+
+@bot.command()
+async def test(ctx,arg):
+  await ctx.send(arg)
+
+@bot.command(name='list')
+async def _list(ctx,arg):
+  pass
+
+  host = data[data.find('(')+1:data.find(')')]
+  await message.channel.send('Convert Identified')
+  FirstUnit = Base_Units.get(unit1)
+  SecondUnit = Base_Units.get(unit2)
+  conversion = Unit.compare(float(host),FirstUnit, SecondUnit)
+  if(conversion.startswith('Error : ')):
+      await message.channel.send(conversion)
+      return
+  conversion_message = f"{host}{unit1} = {conversion:.3e}{unit2}"
+  await message.channel.send(conversion_message)
+  return
+
+     #print(init)
+    #print(data[(init+1):data.find('(', prev_close)])
+    #print((Base_Units.get(data[(init+1):data.find('(', prev_close)])).L)
